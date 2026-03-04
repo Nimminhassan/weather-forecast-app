@@ -12,8 +12,8 @@ st.write("LSTM + XGBoost Temperature Prediction")
 # Load models
 lstm_model = load_model("optimized_lstm_model.keras")
 
-xgb_max = joblib.load("xgb_max.joblib")
-xgb_min = joblib.load("xgb_min.joblib")
+xgb_max = joblib.load("final_xgb_model_max.joblib")
+xgb_min = joblib.load("final_xgb_model_min.joblib")
 
 scaler_X = joblib.load("scaler_X.joblib")
 scaler_y = joblib.load("scaler_y.joblib")
