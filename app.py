@@ -156,15 +156,17 @@ if data_source == "Upload CSV":
     uploaded_file = st.file_uploader("Upload Weather Dataset (CSV)", type=["csv"])
 
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file, skiprows=15)
-        st.success("Dataset uploaded successfully")
+        st.session_state["df"] = pd.read_csv(uploaded_file, skiprows=15)
+        df = st.session_state["df"]
 
 elif data_source == "Download NASA Data":
 
     if st.button("Download NASA Weather Data"):
-        df = download_nasa_data()
+        st.session_state["df"] = download_nasa_data()
         st.success("NASA weather data downloaded successfully")
 
+    if "df" in st.session_state:
+        df = st.session_state["df"]
 
 # -----------------------------
 # MAIN PIPELINE (UNCHANGED)
