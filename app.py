@@ -4,6 +4,8 @@ import numpy as np
 import joblib
 from tensorflow.keras.models import load_model
 import requests
+from datetime import datetime
+end_date = datetime.today().strftime("%Y%m%d")
 
 WINDOW_SIZE = 90
 
@@ -35,7 +37,7 @@ def download_nasa_data():
         "longitude": 76.9296,  # Thiruvananthapuram
         "latitude": 8.5308,
         "start": 20100101,
-        "end": 20241231,
+        "end": end_date,
         "format": "JSON"
     }
 
