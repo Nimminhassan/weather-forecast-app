@@ -53,7 +53,7 @@ if uploaded_file:
     df["T2M_MAX_roll_mean_7"] = df["T2M_MAX"].rolling(7).mean()
     df["T2M_MAX_roll_std_7"] = df["T2M_MAX"].rolling(7).std()
 
-    df = df.dropna()
+    df = df.dropna().reset_index(drop=True)
 
     prediction_date = st.date_input("Select prediction date")
 
