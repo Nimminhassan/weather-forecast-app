@@ -93,11 +93,16 @@ if uploaded_file:
         pred_max_scaled = xgb_max.predict(hybrid_input)
         pred_min_scaled = xgb_min.predict(hybrid_input)
 
-        pred_max = scaler_y.inverse_transform([[pred_max_scaled]])[0][0]
-        pred_min = scaler_y.inverse_transform([[pred_min_scaled]])[0][0]
-        
+        pred_max = scaler_y.inverse_transform(
+            np.array([[pred_max_scaled[0], pred_min_scaled[0]]])
+        )[0][0]
+
+        pred_min = scaler_y.inverse_transform(
+            np.array([[pred_max_scaled[0], pred_min_scaled[0]]])
+        )[0][1]
+
         st.write("Actual Max Temp:", df.iloc[idx]["T2M_MAX"])
         st.write("Actual Min Temp:", df.iloc[idx]["T2M_MIN"])
 
-        st.success(f"Predicted Max Temp: {pred_max[0]:.2f} °C")
-        st.success(f"Predicted Min Temp: {pred_min[0]:.2f} °C")
+        st.success(f"Predicted Max Temp: {pred_max:.2f} °C")
+        st.success(f"Predicted Min Temp: {pred_min:.2f} °C")
