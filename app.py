@@ -82,13 +82,12 @@ if uploaded_file:
         seq_scaled = seq_scaled.reshape(1, WINDOW_SIZE, len(features))
 
         lstm_pred_scaled = lstm_model.predict(seq_scaled)
-        lstm_pred = scaler_y.inverse_transform(lstm_pred_scaled)
 
         # Known features
         known = df.iloc[idx][known_features].values
 
         hybrid_input = np.concatenate(
-            [known, lstm_pred.flatten()]
+            [known, lstm_pred_scaled.flatten()]
         ).reshape(1, -1)
 
         pred_max = xgb_max.predict(hybrid_input)
