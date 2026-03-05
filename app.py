@@ -26,7 +26,7 @@ uploaded_file = st.file_uploader("Upload Weather Dataset (CSV)", type=["csv"])
 
 if uploaded_file:
 
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(uploaded_file, skiprows=15)
 
     # Create date column
     df["date"] = pd.to_datetime(df[["YEAR","MO","DY"]].rename(
