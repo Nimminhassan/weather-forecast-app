@@ -275,22 +275,4 @@ if df is not None:
         st.success(f"Predicted Max Temp: {pred_max:.2f} °C")
         st.success(f"Predicted Min Temp: {pred_min:.2f} °C")
 
-        # -----------------------------
-        # TEMPERATURE TREND GRAPH
-        # -----------------------------
-
-        st.subheader("Temperature Trend (Last 90 Days + Prediction)")
-
-        history = df.iloc[idx-WINDOW_SIZE:idx][["date","T2M_MAX","T2M_MIN"]].copy()
-
-        prediction_row = pd.DataFrame({
-            "date":[prediction_date],
-            "T2M_MAX":[pred_max],
-            "T2M_MIN":[pred_min]
-        })
-
-        chart_df = pd.concat([history, prediction_row])
-
-        chart_df = chart_df.set_index("date")
-
-        st.line_chart(chart_df)
+  
